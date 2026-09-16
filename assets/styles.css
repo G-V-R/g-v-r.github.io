@@ -780,10 +780,21 @@ footer small {
 }
 
 .banner-image {
+  position: relative;
+  z-index: 0;
   width: 100%;
   height: 100%;
   display: block;
   object-fit: cover;
+}
+
+.hero-art:has(.banner-image)::after {
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+  background: color-mix(in srgb, var(--forest) 32%, transparent);
+  content: "";
+  pointer-events: none;
 }
 
 .text-link:hover {
