@@ -315,6 +315,33 @@ nav a:hover,nav .active {
   color: #d5f3ef;
 }
 
+.schedule-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px 30px;
+  margin: 26px 0 34px;
+  padding: 0;
+  list-style: none;
+}
+
+.schedule-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  padding: 12px 22px;
+  background: #ffffff14;
+  border-radius: 999px;
+}
+
+.schedule-list strong {
+  font-size: 15px;
+}
+
+.schedule-list span {
+  font: 13px "DM Mono",monospace;
+  color: #d5f3ef;
+}
+
 .pulse {
   font: 11px "DM Mono",monospace;
   letter-spacing: .1em;
