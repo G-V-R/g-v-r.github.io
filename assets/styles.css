@@ -949,10 +949,6 @@ footer small {
   gap: 20px;
 }
 
-.what3words-link {
-  margin-left: 20px;
-}
-
 .what3words-prefix {
   padding-left: 0;
   color: var(--coral);
