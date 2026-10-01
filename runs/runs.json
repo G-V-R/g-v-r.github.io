@@ -1,0 +1,15 @@
+{
+  "weekBeginning": "2026-09-28",
+  "wednesday": {
+    "time": "7:30pm",
+    "distance": "5k",
+    "location": "Beith Community Centre",
+    "route": "https://www.strava.com/routes/123456789"
+  },
+  "sunday": {
+    "time": "9:30am",
+    "distance": "10k",
+    "location": "Lochwinnoch",
+    "route": "https://www.strava.com/routes/987654321"
+  }
+}

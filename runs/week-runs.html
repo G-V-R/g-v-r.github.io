@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Garnock Valley Runners is a friendly, social running group meeting around Beith, Dalry, Kilbirnie and Lochwinnoch. Come along for a run.">
+  <title>Garnock Valley Runners | Running in Beith, Dalry, Kilbirnie & Lochwinnoch</title>
+  <link rel="canonical" href="https://garnockvalleyrunners.co.uk/">
+  <meta property="og:title" content="Garnock Valley Runners">
+  <meta property="og:description" content="Friendly, social running around the Garnock Valley.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://garnockvalleyrunners.co.uk/">
+  <link rel="stylesheet" href="../assets/styles.css">
+  <link rel="icon" href="../assets/favicon.ico" sizes="any">
+  <link rel="icon" href="../assets/images/icon-512.png" type="image/png">
+  <link rel="apple-touch-icon" href="../assets/images/apple-touch-icon.png">
+  <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"SportsOrganization","name":"Garnock Valley Runners","description":"A friendly social running group in North Ayrshire.","url":"https://garnockvalleyrunners.co.uk/","sameAs":["https://www.facebook.com/groups/1202153667183586/","https://www.strava.com/clubs/1098368"],"areaServed":["Beith","Dalry","Kilbirnie","Lochwinnoch"]}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="brand" href="../index.html" aria-label="Garnock Valley Runners home"><span class="brand-mark">GVR</span><span>Garnock Valley<br><strong>Runners</strong></span></a>
+    <button class="menu-button" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+    <nav id="primary-nav" aria-label="Primary navigation">
+      <a class="active" href="../index.html">Home</a><a href="../locations.html">Meet locations</a><a href="../about.html">About us</a><a class="nav-join" href="../index.html#join">Run with us</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">North Ayrshire running club</p>
+        <h1>Weekly Runs</h1>
+        <p class="lead"></p>
+        <p class="week-begin" id="week-begin">Week beginning: <span></span></p>
+        <p class="week-wed" id="week-wed">Wednesday: <span></span></p>
+        <p class="week-sun" id="week-sun">Sunday: <span></span></p>
+        <div class="actions"><a class="button" href="../index.html#next-run">Find the next run</a><a class="text-link" href="../about.html">New to the group? <span>→</span></a></div>
+      </div>
+      <div class="hero-art"><img class="banner-image" src="../assets/images/gvr-group-7.webp" alt=""></div>
+    </section>
+
+  <footer>
+    <div class="footer-brand"><span class="brand-mark">GVR</span><strong>Garnock Valley Runners</strong></div>
+    <p>Friendly running in North Ayrshire.</p>
+    <div class="footer-links">
+      <a href="https://www.facebook.com/groups/1202153667183586/" target="_blank" rel="noopener noreferrer">Facebook</a>
+      <a href="https://www.strava.com/clubs/1098368" target="_blank" rel="noopener noreferrer">Strava</a>
+      <a href="mailto:garnockvalleyrunners@gmail.com">Email us</a>
+    </div>
+    <small>© <span data-year></span> Garnock Valley Runners</small>
+  </footer>
+  <script>
+    const getStartOfCurrentWeek = () => {
+      const d = new Date();
+      const day = d.getDay();
+      const diffToMonday = day === 0 ? -6 : 1 - day;
+      d.setHours(0, 0, 0, 0);
+      d.setDate(d.getDate() + diffToMonday);
+      return d.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'long',
+        year: 'numeric'
+      });
+    };
+
+    const formatSession = (session) => {
+      if (!session) return 'Unknown';
+      const parts = [session.time, session.distance, session.location, session.route].filter(Boolean);
+      return parts.join(' · ');
+    };
+
+    fetch('./runs.json')
+      .then((response) => response.json())
+      .then((data) => {
+        const weekBeginEl = document.getElementById('week-begin');
+        if (weekBeginEl) {
+          const dateText = data.weekBeginning || getStartOfCurrentWeek();
+          weekBeginEl.querySelector('span').textContent = dateText;
+        }
+
+        const weekWedEl = document.getElementById('week-wed');
+        if (weekWedEl) {
+          weekWedEl.querySelector('span').textContent = formatSession(data.wednesday);
+        }
+
+        const weekSunEl = document.getElementById('week-sun');
+        if (weekSunEl) {
+          weekSunEl.querySelector('span').textContent = formatSession(data.sunday);
+        }
+      })
+      .catch(() => {
+        const weekBeginEl = document.getElementById('week-begin');
+        if (weekBeginEl) {
+          weekBeginEl.querySelector('span').textContent = getStartOfCurrentWeek();
+        }
+      });
+  </script>
+  <script src="../assets/site.js"></script>
+</body>
+</html>
